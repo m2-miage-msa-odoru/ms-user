@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class MembreDTO {
+public class UserDTO {
     @Schema(description = "L'email du membre")
     private String email;
     @Schema(description = "Nom du membre")

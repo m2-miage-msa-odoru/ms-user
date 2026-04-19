@@ -7,7 +7,7 @@
 
     <parent>
         <groupId>fello.miage</groupId>
-        <artifactId>appUser</artifactId>
+        <artifactId>ms-user</artifactId>
         <version>0.0.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
@@ -15,7 +15,6 @@
     <artifactId>rest-api</artifactId>
     <packaging>jar</packaging>
     <name>rest-api — Contrats REST (DTOs, interfaces)</name>
-
     <!--
         Ce module contient UNIQUEMENT :
         - Les DTOs (UserRequest, UserResponse...)
@@ -23,41 +22,33 @@
         - Les annotations de validation sur les DTOs
         PAS de logique métier, PAS de JPA, PAS de BDD.
     -->
-
     <dependencies>
-
         <!-- Annotations @NotBlank, @Email sur les DTOs -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
-
         <!-- @RequestMapping, @GetMapping etc. pour les interfaces controllers -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
         <!-- SpringDoc — annotations @Operation, @ApiResponse sur les interfaces -->
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
             <!-- version gérée par le parent -->
         </dependency>
-
         <!-- Lombok — @Data, @Builder sur les DTOs -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
-
         <!-- MapStruct — interfaces de mapping DTO ↔ Entity -->
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
         </dependency>
-
     </dependencies>
-
 </project>

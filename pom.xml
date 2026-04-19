@@ -13,7 +13,7 @@
     </parent>
 
     <groupId>fello.miage</groupId>
-    <artifactId>appUser</artifactId>
+    <artifactId>ms-user</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>appUser</name>

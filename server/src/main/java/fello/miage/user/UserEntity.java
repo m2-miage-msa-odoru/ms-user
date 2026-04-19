@@ -1,6 +1,6 @@
 package fello.miage.user;
 
-import fello.miage.RoleMembre;
+import fello.miage.enums.RoleMembre;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -10,7 +10,7 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class MembreEntity {
+public class UserEntity {
     @Id
     private String email;
     private String prenom;

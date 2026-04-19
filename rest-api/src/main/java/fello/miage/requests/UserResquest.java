@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class MembreResquest {
+public class UserResquest {
     @Schema(description = "Le mail du membre")
     @Email(message = "Respect le format de l'email")
     @NotBlank(message = "Le mail est obligatoire")

@@ -1,4 +1,4 @@
-package fello.miage;
+package fello.miage.enums;
 
 
 public enum RoleMembre {

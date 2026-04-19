@@ -18,7 +18,7 @@ public class AdressEntity {
     private String description;
 
     @OneToOne(cascade = CascadeType.ALL)
-    private MembreEntity user;
+    private UserEntity user;
 
 
 }
