@@ -52,6 +52,6 @@ ENTRYPOINT ["java", \
             "-XX:MaxRAMPercentage=75.0", \
             "-XX:+ExitOnOutOfMemoryError", \
             "-Djava.security.egd=file:/dev/./urandom", \
-            "-Dspring.config.location=optional:classpath:/application.yml,optional:file:/app/config/user-service.yml", \
+            "-Dspring.cloud.config.import-check.enabled=false", \
             "-jar", \
             "app.jar"]

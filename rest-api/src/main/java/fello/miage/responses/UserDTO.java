@@ -1,5 +1,6 @@
 package fello.miage.responses;
 
+import fello.miage.enums.RoleMembre;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,8 +21,8 @@ public class UserDTO {
     private String prenom;
 
     @Schema(description = "Role du membre")
-    private String role;
+    private RoleMembre role;
 
     @Schema(description = "Le niveau d'expertise du membre")
-    private String niveau_expertise;
+    private Integer niveau_expertise;
 }
