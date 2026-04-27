@@ -3,7 +3,6 @@ package fello.miage.endpoints;
 
 import fello.miage.enums.RoleMembre;
 import fello.miage.requests.UserRequest;
-import fello.miage.requests.UserUpdateRequest;
 import fello.miage.responses.UserDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

@@ -7,8 +7,6 @@ import fello.miage.modeles.UserEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import javax.management.relation.Role;
-import java.util.List;
 
 
 @Component
