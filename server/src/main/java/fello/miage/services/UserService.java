@@ -3,6 +3,7 @@ package fello.miage.services;
 import fello.miage.components.UserComponent;
 import fello.miage.enums.RoleMembre;
 import fello.miage.exceptions.rest.BadRequestRestException;
+import fello.miage.exceptions.technical.UserNotFoundException;
 import fello.miage.mappers.UserMapper;
 import fello.miage.messaging.producer.RabbitMQProducer;
 import fello.miage.requests.UserRequest;
@@ -35,7 +36,7 @@ public class UserService {
         }
     }
 
-    public UserDTO updateUser(String email, RoleMembre roleMembre, int niveau_expertise) {
+    public UserDTO updateUser(String email, RoleMembre roleMembre, int niveau_expertise){
         try {
             UserEntity userEntity = userComponent.getUserById(email);
             int ancienNiveauExpertise = userEntity.getNiveau_expertise();
@@ -47,9 +48,9 @@ public class UserService {
                 userEntity.setRole(roleMembre);
             }
 
-            UserEntity updatedUser = userComponent.updateUser(email,roleMembre,niveau_expertise);
+            UserEntity updatedUser = userComponent.updateUser(userEntity);
 
-            if (niveau_expertise != 0 && ancienNiveauExpertise != updatedUser.getNiveau_expertise()) {
+            if (niveau_expertise != 0 && ancienNiveauExpertise != niveau_expertise) {
                 rabbitMQProducer.publishExpertiseUpdated(updatedUser, ancienNiveauExpertise);
             }
 

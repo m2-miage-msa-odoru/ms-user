@@ -1,10 +1,69 @@
-datasource:
-    url: ${DB_URL:jdbc:postgresql://postgres:5432/msuser}
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+server:
+  port: ${SERVER_PORT:8081}
+
+spring:
+  application:
+    name: user-service
+
+  # Import obligatoire du Config Server (peut être optionnel pour le dev local)
+  config:
+    import: "optional:configserver:${CONFIG_SERVER_URL:http://config-server:8888}"
+
+  cloud:
+    config:
+      enabled: ${CONFIG_ENABLED:true}
+      uri: ${CONFIG_SERVER_URL:http://config-server:8888}
+      fail-fast: false
+
+  # Valeurs par défaut surchargées par user-service.yml du Config Server
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/msuser}
+    username: ${DB_USERNAME:user}
+    password: ${DB_PASSWORD:password}
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
 
   rabbitmq:
-    host: ${RABBITMQ_HOST:rabbitmq}
+    host: ${RABBITMQ_HOST:localhost}
     port: ${RABBITMQ_PORT:5672}
-    username: ${RABBITMQ_USERNAME}
-    password: ${RABBITMQ_PASSWORD}
+    username: ${RABBITMQ_USERNAME:msuser_admin}
+    password: ${RABBITMQ_PASSWORD:msuser_mdp}
+
+# Noms d'exchange et routing keys utilisés par RabbitMQConfig et RabbitMQProducer
+rabbitmq:
+  exchange:
+    user-events: user.events
+  routing-key:
+    user-registered: user.registered
+    expertise-updated: user.expertise.updated
+
+# Swagger / OpenAPI
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+
+eureka:
+  client:
+    enabled: ${EUREKA_ENABLED:true}
+    register-with-eureka: ${EUREKA_ENABLED:true}
+    fetch-registry: ${EUREKA_ENABLED:true}
+    service-url:
+      defaultZone: ${EUREKA_URL:http://eureka-server:8761/eureka/}
+  instance:
+    prefer-ip-address: true
+    hostname: ${EUREKA_HOSTNAME:user-service}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info

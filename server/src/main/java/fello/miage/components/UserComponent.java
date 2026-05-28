@@ -25,11 +25,8 @@ public class UserComponent {
 
     }
 
-    public UserEntity updateUser(String email, RoleMembre roleMembre, int niveau_expertise) throws UserNotFoundException {
-        UserEntity user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new UserNotFoundException("User not found: " + email));
-
-        return userRepository.save(user);
+    public UserEntity updateUser(UserEntity userEntity){
+        return userRepository.save(userEntity);
     }
 
     public Iterable<UserEntity> getUsers() {
