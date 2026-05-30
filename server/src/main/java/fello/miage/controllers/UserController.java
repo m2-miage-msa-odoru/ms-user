@@ -2,6 +2,7 @@ package fello.miage.controllers;
 
 import fello.miage.endpoints.UserEndpoint;
 import fello.miage.enums.RoleMembre;
+import fello.miage.requests.LoginRequest;
 import fello.miage.requests.UserRequest;
 import fello.miage.requests.UserUpdateRequest;
 import fello.miage.responses.UserDTO;
@@ -36,5 +37,10 @@ public class UserController implements UserEndpoint {
     @Override
     public Iterable<UserDTO> getAllUsers() {
         return userService.getAllUsers();
+    }
+
+    @Override
+    public UserDTO login(LoginRequest loginRequest) {
+        return userService.login(loginRequest);
     }
 }

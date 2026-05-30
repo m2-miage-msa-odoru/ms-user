@@ -6,6 +6,7 @@ import fello.miage.exceptions.rest.BadRequestRestException;
 import fello.miage.exceptions.technical.UserNotFoundException;
 import fello.miage.mappers.UserMapper;
 import fello.miage.messaging.producer.RabbitMQProducer;
+import fello.miage.requests.LoginRequest;
 import fello.miage.requests.UserRequest;
 import fello.miage.requests.UserUpdateRequest;
 import fello.miage.responses.UserDTO;
@@ -68,5 +69,17 @@ public class UserService {
             throw new NotFoundException(e.getMessage());
         }
 
+    }
+
+    public UserDTO login(LoginRequest loginRequest) {
+        try {
+            UserEntity user = userComponent.getUserById(loginRequest.getEmail());
+            if (!user.getMot_de_passe().equals(loginRequest.getMotDePasse())) {
+                throw new BadRequestRestException("Email ou mot de passe incorrect");
+            }
+            return userMapper.toUserDTO(user);
+        } catch (Exception e) {
+            throw new BadRequestRestException("Email ou mot de passe incorrect");
+        }
     }
 }
