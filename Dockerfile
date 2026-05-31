@@ -31,8 +31,9 @@ LABEL maintainer="fello.miage" \
       service="user-service" \
       version="0.0.1-SNAPSHOT"
 
-# Création d'un utilisateur non-root pour la sécurité
-RUN addgroup -S odoru && \
+# Installation de curl (utilisé par le healthcheck Docker) + utilisateur non-root
+RUN apk add --no-cache curl && \
+    addgroup -S odoru && \
     adduser -S odoru -G odoru && \
     mkdir -p /app/config && \
     chown -R odoru:odoru /app

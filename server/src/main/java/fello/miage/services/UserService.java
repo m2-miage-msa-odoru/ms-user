@@ -82,4 +82,13 @@ public class UserService {
             throw new BadRequestRestException("Email ou mot de passe incorrect");
         }
     }
+
+    public UserDTO getUserByEmail(String email) {
+        try {
+            UserEntity user = userComponent.getUserById(email);
+            return userMapper.toUserDTO(user);
+        } catch (Exception e) {
+            throw new BadRequestRestException("Membre introuvable : " + email);
+        }
+    }
 }

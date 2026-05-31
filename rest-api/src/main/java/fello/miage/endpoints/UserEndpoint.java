@@ -40,4 +40,11 @@ public interface UserEndpoint {
     @ResponseStatus(code = HttpStatus.OK)
     @PostMapping("/login")
     UserDTO login(@RequestBody LoginRequest loginRequest);
+
+    @Operation(description = "Récupère un membre par son email")
+    @ApiResponse(responseCode = "200", description = "Membre trouvé")
+    @ApiResponse(responseCode = "404", description = "Membre introuvable")
+    @ResponseStatus(code = HttpStatus.OK)
+    @GetMapping("/{email}")
+    UserDTO getMembreByEmail(@PathVariable(name = "email") String email);
 }

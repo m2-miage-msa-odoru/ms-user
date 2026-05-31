@@ -43,4 +43,9 @@ public class UserController implements UserEndpoint {
     public UserDTO login(LoginRequest loginRequest) {
         return userService.login(loginRequest);
     }
+
+    @Override
+    public UserDTO getMembreByEmail(String email) {
+        return userService.getUserByEmail(email);
+    }
 }
