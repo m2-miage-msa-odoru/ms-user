@@ -22,13 +22,11 @@ public class UserController implements UserEndpoint {
     }
 
     /**
-     * @param email
-     * @param  roleMembre, niveau_expertise
-     * @return
+     * Mise à jour d'un adhérent — réservée à la SECRETAIRE (son rôle est vérifié dans le service).
      */
     @Override
-    public UserDTO updateMembre(String email, RoleMembre roleMembre,int niveau_expertise) {
-        return userService.updateUser(email, roleMembre, niveau_expertise);
+    public UserDTO updateMembre(String email, String secretaireEmail, RoleMembre roleMembre, int niveau_expertise) {
+        return userService.updateUser(email, secretaireEmail, roleMembre, niveau_expertise);
     }
 
     /**

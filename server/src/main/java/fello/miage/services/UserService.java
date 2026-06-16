@@ -3,6 +3,7 @@ package fello.miage.services;
 import fello.miage.components.UserComponent;
 import fello.miage.enums.RoleMembre;
 import fello.miage.exceptions.rest.BadRequestRestException;
+import fello.miage.exceptions.rest.ForbiddenRestException;
 import fello.miage.exceptions.technical.UserNotFoundException;
 import fello.miage.mappers.UserMapper;
 import fello.miage.messaging.producer.RabbitMQProducer;
@@ -37,7 +38,20 @@ public class UserService {
         }
     }
 
-    public UserDTO updateUser(String email, RoleMembre roleMembre, int niveau_expertise){
+    public UserDTO updateUser(String email, String secretaireEmail, RoleMembre roleMembre, int niveau_expertise){
+        // Seule une SECRETAIRE est autorisée à modifier un adhérent.
+        // Vérification effectuée AVANT le try afin de préserver le code HTTP 403.
+        UserEntity secretaire;
+        try {
+            secretaire = userComponent.getUserById(secretaireEmail);
+        } catch (UserNotFoundException e) {
+            throw new ForbiddenRestException("Secrétaire introuvable : " + secretaireEmail);
+        }
+        if (secretaire.getRole() != RoleMembre.SECRETAIRE) {
+            throw new ForbiddenRestException(
+                    "Seule une SECRETAIRE peut modifier un adhérent. Rôle de " + secretaireEmail + " : " + secretaire.getRole());
+        }
+
         try {
             UserEntity userEntity = userComponent.getUserById(email);
             int ancienNiveauExpertise = userEntity.getNiveau_expertise();
